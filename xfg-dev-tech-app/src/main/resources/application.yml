@@ -1,5 +1,5 @@
 spring:
   config:
-    name: xfg-dev-tech
+    name: jdjm-dev-tech
   profiles:
     active: dev

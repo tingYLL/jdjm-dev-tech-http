@@ -50,8 +50,11 @@ public class ZSXQJob {
     @Value("${chatglm.sdk.config.cookie}")
     private String cookie;
 
+
+
+
     @Scheduled(cron = "0/10 * * * * ?")
-    public void exec() throws Exception {
+    public void exec2() throws Exception {
         Response response = getResponse(cookie);
         RespData respData = response.getRespData();
         List<TopicsItem> topics = respData.getTopics();
@@ -74,7 +77,7 @@ public class ZSXQJob {
             if (matcher.find()) {
                 String uid = matcher.group(1);
                 String remainingText = matcher.group(3);
-                if ("241858242255511".equals(uid)) {
+                if ("212884888211521".equals(uid)) {
 
                     if (null == openAiSession) {
                         log.info("你没有开启 ChatGLM 参考yml配置文件来开启");
@@ -137,7 +140,6 @@ public class ZSXQJob {
         }
 
     }
-
     private boolean isCommentDone(TopicsItem topicsItem) {
         List<ShowCommentsItem> showComments = topicsItem.getShowComments();
         if (null != showComments && !showComments.isEmpty()) {
@@ -145,13 +147,15 @@ public class ZSXQJob {
                 Owner owner = showCommentsItem.getOwner();
                 long userId = owner.getUserId();
                 // 如果已经被我回答过，则不回答
-                if (241858242255511L == userId) {
+                if (212884888211521L  == userId) {
                     return false;
                 }
             }
         }
         return true;
     }
+
+
 
     private void comment(String cookie, long topicId, String text) {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
